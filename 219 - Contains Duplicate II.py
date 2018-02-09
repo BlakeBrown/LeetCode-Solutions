@@ -5,6 +5,8 @@ class Solution(object):
         :type k: int
         :rtype: bool
         """
+        # Rather than storing the index in the hashtable, could also
+        # delete the i-k key from the hashtable as you iterate
         indexLookup = {}
         for i, num in enumerate(nums):
             if num in indexLookup:
