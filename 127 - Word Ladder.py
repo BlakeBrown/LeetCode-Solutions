@@ -97,3 +97,76 @@ class Solution(object):
             return 0
         else:
             return distance[endWord]
+
+# Solution #3 (unidirectional BFS with sets):
+# We can further optimize the previous solution by 
+# doing a bidirectional BFS. To set up for this, start by changing
+# our BFS to use sets. The reason we need to use sets is because
+# bidirectional BFS requires us to compare beginQueue with
+# endQueue on each iteration. Sets are much faster to compare than lists.
+# See: https://wiki.python.org/moin/TimeComplexity
+
+class Solution(object):
+
+    def ladderLength(self, beginWord, endWord, wordList):
+        """
+        :type beginWord: str
+        :type endWord: str
+        :type wordList: List[str]
+        :rtype: int
+        """
+        # Apply BFS with sets.
+        wordSet = set(wordList) # O(n) time to make set
+        front = set([beginWord])
+        distance = 1
+        while len(front) != 0:
+            # Generate all possible children of the nodes in front
+            possible = set(word[:i] + c + word[i+1:] for word in front for i in range(0, len(word)) for c in 'abcdefghijklmnopqrstuvwxyz')
+            # Take the intersection with wordSet to get the next children
+            # we want to visit
+            front = wordSet & possible
+            distance += 1
+            wordSet -= front
+            if endWord in front:
+                return distance
+        return 0
+
+# Solution #4 (bidirectional BFS with): This is much faster than our
+# previous solutions since it applies BFS in both directions.
+class Solution(object):
+
+    def ladderLength(self, beginWord, endWord, wordList):
+        """
+        :type beginWord: str
+        :type endWord: str
+        :type wordList: List[str]
+        :rtype: int
+        """
+        wordSet = set(wordList)
+        back = set([endWord])
+        front = set([beginWord])
+        distance = 1
+        # Edge case
+        if endWord not in wordSet:
+            return 0
+        # Apply bidirectional BFS
+        while len(front) != 0:
+            # Take the intersection of sets to see if we've found a 
+            # common node. We need to do this at the start of the loop
+            # in case back = front.
+            if front & back:
+                return distance
+            # Remove nodes we've already visited to avoid a cycle
+            wordSet -= front
+            # Generate all possible children of the nodes in front
+            possible = set(word[:i] + c + word[i+1:] for word in front for i in range(0, len(word)) for c in 'abcdefghijklmnopqrstuvwxyz')
+            front = wordSet & possible
+            distance += 1
+            # Swap back and front. This is so on the next iteration
+            # we're expanding from the destination, and the iteration after
+            # after we're expanding from the source, and so on.
+            # This is the key part of bidirectional BFS.
+            tmp = front
+            front = back
+            back = tmp
+        return 0
