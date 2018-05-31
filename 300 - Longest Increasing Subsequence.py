@@ -97,7 +97,7 @@ class Solution(object):
         """
         if(len(nums) <= 1):
             return len(nums)
-        lis = [] # lis[i] = largest element that starts an LIS of length i
+        lis = [] # lis[i] = smallest element that starts an LIS of length i
         for i in range(0,len(nums)):
             update = 0
             for j in range(0, len(lis)):
@@ -124,7 +124,7 @@ class Solution(object):
         """
         if(len(nums) <= 1):
             return len(nums)
-        lis = [nums[0]] # lis[i] = largest element that starts an LIS of length i
+        lis = [nums[0]] # lis[i] = smallest element that starts an LIS of length i
         for i in range(1,len(nums)):
             binarySearchIndex = bisect.bisect(lis,nums[i])
             # Avoid duplicate LIS
