@@ -1,10 +1,10 @@
 # Solution 1: An O(n^2) algorithm is to start from the back of the array.
 # Observe that the last element creates an LIS of size 1. Move to the
-# second last element and observe that this will either create
-# an LIS of size 2 (if it is smaller than the last element), or a new LIS of size 1.
-# Repeat this process.
-# Move backwards through the array keeping track of <start of LIS, length of LIS>.
-# Each element will either start a new LIS of size 1, or add to an existing LIS.
+# next element, this will either create an LIS of size 2 (if it is smaller
+# than the last element), or a new LIS of size 1.
+# Repeat this process by moving backwards through the array and keeping track
+# of <start of LIS, length of LIS>.
+# tldr; Each element will either start a new LIS of size 1, or add to an existing LIS.
 
 class Solution(object):
     def lengthOfLIS(self, nums):
