@@ -39,3 +39,18 @@ class Solution(object):
         subsets.append([])
         subsets.append([nums[0]])
         return self.pset(nums[1:], subsets)
+
+# Solution 3: I thought this solution was beautiful, takes advantage
+# of list comprehension in Python.
+# Runtime: O(n * (2^n)), it's hard to see with this concise code but keep in mind
+# there are still 2^n subsets and it takes O(n) time to build each of them
+class Solution(object):
+    def subsets(self, nums):
+        """
+        :type nums: List[int]
+        :rtype: List[List[int]]
+        """
+        pset = [[]] # we'll always have the empty set
+        for num in nums:
+            pset += [subset + [num] for subset in pset]
+        return pset
