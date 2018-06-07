@@ -33,8 +33,8 @@ class Solution(object):
 # ex. if an element is duplicated 3 times, we add this element 0 -> 3 times to
 # every existing subset in our list
 
-# I went hard on this solution using list comprehension, but for some reason
-# it only works with Python 3 on LeetCode
+# For some reason this solution only works with Python 3 on LeetCode,
+# maybe due to the list comprehension.
 # Runtime = O(n * (2^n))
 class Solution(object):
     def subsetsWithDup(self, nums):
