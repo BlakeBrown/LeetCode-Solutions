@@ -4,13 +4,17 @@ class Solution(object):
         :type s: str
         :rtype: bool
         """
-        s2 = ""
-        for c in s:
-            if c.isalnum():
-                s2 += c
-        
-        s2 = s2.lower()
-        for i in range(len(s2)/2):
-            if s2[i] != s2[len(s2)-i-1]:
+        i = 0
+        j = len(s)-1
+        while i < len(s) and j >= 0:
+            if not s[i].isalnum():
+                i += 1
+                continue
+            if not s[j].isalnum():
+                j -= 1
+                continue
+            if s[i].lower() != s[j].lower():
                 return False
+            i += 1
+            j -= 1
         return True
