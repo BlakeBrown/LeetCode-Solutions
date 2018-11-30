@@ -44,17 +44,11 @@ class Solution(object):
         """
         if len(intervals) == 0:
             return intervals
-        intervals.sort(key=lambda x: x.start)
-        merged = []
-        merged.append(intervals[0])
-        for i in range(1, len(intervals)):
-            start1 = merged[len(merged)-1].start
-            end1 = merged[len(merged)-1].end
-            start2 = intervals[i].start
-            end2 = intervals[i].end
-            if start2 <= end1:
-                i += 1
-                merged[len(merged)-1].end = max(end1,end2)
+        intervals.sort(key=lambda x:x.start)
+        merged = [intervals[0]]
+        for interval in intervals:
+            if interval.start <= merged[-1].end:
+                merged[-1].end = max(merged[-1].end, interval.end)
             else:
-                merged.append(intervals[i])
+                merged.append(interval)
         return merged
