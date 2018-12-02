@@ -1,5 +1,9 @@
-// Builds a max heap and pops off the max element k times
-// Runtime: O(n) to build heap + O(klogn) to pop off the max element
+// The naive solution is to sort the list O(nlogn) and then just
+// take the Kth largest element O(1). Let's try to do better.
+
+
+// Solution 1: Build a max heap and pop off the max element k times
+// Runtime: O(n) to build the heap + O(klogn) to pop off the max element
 class Solution {
 public:
     int findKthLargest(vector<int>& nums, int k) {
@@ -12,5 +16,5 @@ public:
     }
 };
 
-// The naive solution is to sort the list and then just take the Kth largest element O(nlogn)
-// The best solution is to use quick select, which has average case complexity O(n)
+// Solution 2: Use quick select, which has average case complexity O(n) but worst
+// case O(n^2)
