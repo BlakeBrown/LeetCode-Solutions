@@ -6,7 +6,7 @@
 # * can represent either '(', ')' or an empty string.
 # The trick is to realize that we can try all three combinations by representing count as a range (low/high).
 # - If we see '(' then low++ and high++
-# - If we see ')' then low-- and high++
+# - If we see ')' then low-- and high--
 # - If we see '*' then low-- and high++
 # Checks:
 # - We need to enforce that low never goes negative. This doesn't make sense, for instance if we have a
